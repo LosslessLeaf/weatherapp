@@ -1,48 +1,5 @@
-<body onload="getLocation()">
-    <h1>Get Weather</h1>
-    <ul>
-        <li id="latitude"></li>
-        <li id="longitude"></li>
-    </ul>
-    
+<h1>Get your weather here!</h1>
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <script>
-        function showLocation(position){
-            // gets Latitude and Longitude and displays onload (if permission is granted)
-            var lat = position.coords.latitude;
-            var long = position.coords.longitude;
-            document.getElementById("latitude").innerHTML = lat;
-            document.getElementById("longitude").innerHTML = long;
-        }
-        function errorHandler(err) {
-            // Access is denied error
-            if(err.code == 1) {
-                alert(`Error: Access is denied!`);
-            }
-            // Position is unavailable error
-            else if (err.code == 2){
-                alert(`Error: Position is unavailable!`);
-            }
-        }
-        function getLocation() {
-            // Call geolocation and then Show Location if access is granted and there are no errors;
-            if (navigator.geolocation) {
-                var options = {timeout: 60000};
-                navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
-            }
-            else {
-                alert(`Sorry, browser does not support geolocation!`);
-            }
-        }
-    </script>
-</body>
+<% data["weather"].forEach(e => { %>
+    <li><%= e["main"] %></li>
+<% }) %>

@@ -1,0 +1,47 @@
+<h1>Search for your city!</h1>
+
+<body onload="getLocation(), submitLocation()">
+    
+<form action="/weather" method="GET" name="user-location">
+    <input type="text" name="lat" id="latitude" value="">
+    <input type="text" name="long" id="longitude" value="">
+    <input type="submit">
+</form>
+
+<script>
+    
+     function showLocation(position){
+            // gets Latitude and Longitude and displays onload (if permission is granted)
+            var lat = position.coords.latitude;
+            var long = position.coords.longitude;
+            document.getElementById("latitude").value = lat;
+            document.getElementById("longitude").value = long;
+        }
+        function errorHandler(err) {
+            // Access is denied error
+            if(err.code == 1) {
+                alert(`Error: Access is denied!`);
+            }
+            // Position is unavailable error
+            else if (err.code == 2){
+                alert(`Error: Position is unavailable!`);
+            }
+        }
+        function getLocation() {
+            // Call geolocation and then Show Location if access is granted and there are no errors;
+            if (navigator.geolocation) {
+                var options = {timeout: 60000};
+                navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
+            }
+            else {
+                alert(`Sorry, browser does not support geolocation!`);
+            }
+            
+        }
+        function submitLocation() {
+            document.forms['user-location'].submit();
+        }
+</script>
+</body>
+
+
