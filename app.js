@@ -11,6 +11,8 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
+app.use(express.static(__dirname + '/public'));
+
 app.set("view engine", "ejs");
 
 
@@ -19,9 +21,10 @@ app.get("/", function(req, res) {
 });
 
 app.get("/weather", function(req, res) {
-    var lat = req.query.lat;
-    var long = req.query.long;
-    var url = `https://fcc-weather-api.glitch.me/api/current?lat=${lat}&lon=${long}`;
+    const lat = req.query.lat;
+    const long = req.query.long;
+    let url = `https://fcc-weather-api.glitch.me/api/current?lat=${lat}&lon=${long}`;
+    console.log("requested...");
     request(url, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             var data = JSON.parse(body);

@@ -1,5 +1,62 @@
-<h1>Get your weather here!</h1>
+<head>
+    <title>Your Local Weather</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.css">
+</head>
+<body>
+    
+    <div id="container">
+        <div id="flex-body">
+            <h1 id="city-name"><%= data.name %></h1>
+            <h2 id="temperature"><span id="real-temp"><%= data.main.temp %></span>º<span id="temp-type">F</span></h2>
+            <button onclick="switchMetric()">Convert Temp</button>
+            <p id="weather-type"><%= data.weather[0].main %></p>
+            <p id="weather-icon"></p>
+        </div>
+    </div>
+    
+    
+    
+    
+    <script>
+        if(document.getElementById("weather-type").innerText == "Clear") {
+            document.getElementById("weather-icon").innerHTML = `<i class="wi wi-day-sunny"></i>`;
+        }
+        else if(document.getElementById("weather-type").innerText == "Clouds") {
+            document.getElementById("weather-icon").innerHTML = `<i class="wi wi-cloudy"></i>`;
+        }
+        else if(document.getElementById("weather-type").innerText == "Mist") {
+            document.getElementById("weather-icon").innerHTML = `<i class="wi wi-sprinkle"></i>`;
+        }
+        else if(document.getElementById("weather-type").innerText == "Drizzle") {
+            document.getElementById("weather-icon").innerHTML = `<i class="wi wi-sprinkle"></i>`;
+        }
+        else if(document.getElementById("weather-type").innerText == "Rain") {
+            document.getElementById("weather-icon").innerHTML = `<i class="wi wi-rain"></i>`;
+        }
+        else if(document.getElementById("weather-type").innerText == "Thunderstorm") {
+            document.getElementById("weather-icon").innerHTML = `<i class="wi wi-thunderstorm"></i>`;
+        }
+        else if(document.getElementById("weather-type").innerText == "Snow") {
+            document.getElementById("weather-icon").innerHTML = `<i class="wi wi-snow"></i>`;
+        }
+        
+        function switchMetric() {
+            var temp = parseInt(document.getElementById("real-temp").innerText);
+            
+            if (document.getElementById("temp-type").innerText == "F") {
+                var convertToCelsius = ((temp - 32) * (5/9));
+                document.getElementById("real-temp").innerText = convertToCelsius.toFixed(2);
+                document.getElementById("temp-type").innerText = "C";
+            }
+            else if (document.getElementById("temp-type").innerText == "C") {
+                var convertToFahrenheit = temp * (9/5) + 32;
+                document.getElementById("real-temp").innerText = convertToFahrenheit.toFixed(2);
+                document.getElementById("temp-type").innerText = "F";
+            }
+        }
+        
+    </script>
 
-<% data["weather"].forEach(e => { %>
-    <li><%= e["main"] %></li>
-<% }) %>
+</body>
+
