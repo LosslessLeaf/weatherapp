@@ -1,62 +1,9 @@
-<h1>Home page!!!</h1>
-
-<button onclick="getLocation()">Get location!</button>
-<p><button onclick="geoFindMe()">Show my location</button></p>
-<div id="out"></div>
-
+<body>
+    <h1>Home page!!!</h1>
+</body>
 
 
 <script>
-    // function showLocation(position){
-    //     var latitude = position.coords.latitude;
-    //     var longitude = position.coords.longitude;
-    //     alert(`Latitude: ${latitude} Longitude: ${longitude}`);
-    // }
-    // function errorHandler(err){
-    //     if (err.code == 1) {
-    //         alert(`Error: Access is denied!`);
-    //     }
-    //     else if (err.code == 2){
-    //         alert(`Error: Permission is denied!`);
-    //     }
-    // }
-    // function getLocation() {
-    //     if (navigator.geolocation){
-    //         var options = {timeout: 60000};
-    //         navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
-    //     }
-    //     else {
-    //         alert(`Sorry, browser does not support geolocation!`);
-    //     }
-    // }
     
-    function geoFindMe() {
-        var output = document.getElementById("out");
-
-        if (!navigator.geolocation){
-            output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-        return;
-        }
-
-    function success(position) {
-        var latitude  = position.coords.latitude;
-        var longitude = position.coords.longitude;
     
-        output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
-    
-        var img = new Image();
-        img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false&key=YOUR_API_KEY";
-    
-        output.appendChild(img);
-    }
-
-    function error() {
-        output.innerHTML = "Unable to retrieve your location";
-    }
-    
-    output.innerHTML = "<p>Locating…</p>";
-    
-    navigator.geolocation.getCurrentPosition(success, error);
-    
-    }
 </script>
